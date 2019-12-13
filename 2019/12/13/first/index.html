@@ -108,6 +108,14 @@
     
         
             
+            <li><div data-rel="blog">blog<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="dayone">dayone<small>(1)</small></div>
                 
             </li>
@@ -117,14 +125,6 @@
         
             
             <li><div data-rel="Diary">Diary<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="blog">blog<small>(1)</small></div>
                 
             </li>
             
@@ -175,6 +175,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a class="color3">history</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color2">dirary</a>
     </li>
     
@@ -186,15 +190,19 @@
         <a class="color1">Games</a>
     </li>
     
-    <li class="article-tag-list-item">
-        <a class="color3">history</a>
-    </li>
-    
     <div class="clearfix"></div>
 </div>
 
     
     <nav id="title-list-nav">
+        
+        <a  class="blog "
+           href="/2019/12/13/%E9%97%9C%E4%BA%8E%E2%80%9C%E5%AE%85%E2%80%9D%E7%9A%84%E6%84%8F%E8%AD%98%E5%BD%A2%E6%85%8B/"
+           data-tag="history"
+           data-author="" >
+            <span class="post-title" title="關于“宅”的意識形態">關于“宅”的意識形態</span>
+            <span class="post-date" title="2019-12-13 16:05:10">2019/12/13</span>
+        </a>
         
         <a  class="dayone "
            href="/2019/12/13/first/"
@@ -210,14 +218,6 @@
            data-author="" >
             <span class="post-title" title="Hello World">Hello World</span>
             <span class="post-date" title="2019-12-13 11:58:45">2019/12/13</span>
-        </a>
-        
-        <a  class="blog "
-           href="/2019/12/13/%E9%97%9C%E4%BA%8E%E2%80%9C%E5%AE%85%E2%80%9D%E7%9A%84%E6%84%8F%E8%AD%98%E5%BD%A2%E6%85%8B/"
-           data-tag="history"
-           data-author="" >
-            <span class="post-title" title="關于“宅”的意識形態">關于“宅”的意識形態</span>
-            <span class="post-date" title="2019-12-13 16:05:10">2019/12/13</span>
         </a>
         
     </nav>
@@ -339,7 +339,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#dirary','#PS3','#Games','#history',],
+            'data': ['#history','#dirary','#PS3','#Games',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
