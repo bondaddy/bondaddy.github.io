@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2020/1 | heros come back</title>
+  <title>Scala实用指南读书笔记（二） | heros come back</title>
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,12 +12,18 @@
   <link rel="shortcut icon" href="/">
   <link rel="alternate" href="/atom.xml" title="heros come back">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="heros come back">
-<meta property="og:url" content="http:&#x2F;&#x2F;bondaddy.github.io&#x2F;archives&#x2F;2020&#x2F;01&#x2F;index.html">
+  <meta name="description" content="第二部分 深入 Scala 是时候深入学习 Scala 了。读者将了解:  如何创建和使用函数值 如何使用特质进行编程 如何使用不同类型的集合 如何使用模式匹配的能力 如何进行尾调用优化  函数值和闭包函数可以作为参数值传入其他函数中，函数的返回值可 以是函数，函数甚至可以嵌套函数。这些高阶函数在 Scala 中被称为函数值(function value)。闭 包(closure)是函数值的特殊形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala实用指南读书笔记（二）">
+<meta property="og:url" content="http:&#x2F;&#x2F;bondaddy.github.io&#x2F;2020&#x2F;01&#x2F;07&#x2F;----82&#x2F;index.html">
 <meta property="og:site_name" content="heros come back">
+<meta property="og:description" content="第二部分 深入 Scala 是时候深入学习 Scala 了。读者将了解:  如何创建和使用函数值 如何使用特质进行编程 如何使用不同类型的集合 如何使用模式匹配的能力 如何进行尾调用优化  函数值和闭包函数可以作为参数值传入其他函数中，函数的返回值可 以是函数，函数甚至可以嵌套函数。这些高阶函数在 Scala 中被称为函数值(function value)。闭 包(closure)是函数值的特殊形">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-07T06:53:48.000Z">
+<meta property="article:modified_time" content="2020-01-07T06:52:32.908Z">
 <meta property="article:author" content="bon爸">
+<meta property="article:tag" content="software programming">
+<meta property="article:tag" content="scala">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -103,36 +109,31 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
+        <article id="post-----82"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2020/01/07/----82/">
+    	Scala实用指南读书笔记（二）
+    </a>
+  </h2>
+	<time>
+	  1月 7, 2020
+	</time>
 	
-  <script>
-    window.subData= { title:'Year : 2020.1'}
-  </script>
-
-<section class="post-list">
-	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/01/07/----82/">
-        Scala实用指南读书笔记（二）
-      </a>
-    </h2>
-    
-    <time>
-      1月 7, 2020
-    </time>
-		
     
     <div class='cats'>
         <a href="/categories/professional-skill/">professional skill</a>
     </div>
 
-  </section>
-  <section class="article typo">
-	  <p>第二部分 深入 Scala</p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#函数值和闭包"><span class="toc-number">1.</span> <span class="toc-text">函数值和闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常规函数的局限性"><span class="toc-number">1.1.</span> <span class="toc-text">常规函数的局限性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可扩展性与高阶函数"><span class="toc-number">1.2.</span> <span class="toc-text">可扩展性与高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具有多个参数的函数值"><span class="toc-number">1.3.</span> <span class="toc-text">具有多个参数的函数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#柯里化"><span class="toc-number">1.4.</span> <span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数的占位符"><span class="toc-number">1.5.</span> <span class="toc-text">参数的占位符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数路由"><span class="toc-number">1.6.</span> <span class="toc-text">参数路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复用函数值"><span class="toc-number">1.7.</span> <span class="toc-text">复用函数值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部分应用函数"><span class="toc-number">1.8.</span> <span class="toc-text">部分应用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">1.9.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Execute-Around-Method-模式"><span class="toc-number">1.10.</span> <span class="toc-text">Execute Around Method 模式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#特质"><span class="toc-number">2.</span> <span class="toc-text">特质</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解特质"><span class="toc-number">2.1.</span> <span class="toc-text">理解特质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择性混入"><span class="toc-number">2.2.</span> <span class="toc-text">选择性混入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用特质实现装饰器模式"><span class="toc-number">2.3.</span> <span class="toc-text">使用特质实现装饰器模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特质中的方法延迟绑定"><span class="toc-number">2.4.</span> <span class="toc-text">特质中的方法延迟绑定</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-number">3.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的-Scala-集合"><span class="toc-number">3.1.</span> <span class="toc-text">常见的 Scala 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Set"><span class="toc-number">3.2.</span> <span class="toc-text">使用 Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关联映射"><span class="toc-number">3.3.</span> <span class="toc-text">关联映射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不可变列表"><span class="toc-number">3.4.</span> <span class="toc-text">不可变列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模式匹配和正则表达式"><span class="toc-number">4.</span> <span class="toc-text">模式匹配和正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#模式匹配综述"><span class="toc-number">4.1.</span> <span class="toc-text">模式匹配综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配字面量和常量"><span class="toc-number">4.1.1.</span> <span class="toc-text">匹配字面量和常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配通配符"><span class="toc-number">4.1.2.</span> <span class="toc-text">匹配通配符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配元组和列表"><span class="toc-number">4.1.3.</span> <span class="toc-text">匹配元组和列表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-case-类进行模式匹配"><span class="toc-number">4.2.</span> <span class="toc-text">使用 case 类进行模式匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提取器和正则表达式"><span class="toc-number">4.3.</span> <span class="toc-text">提取器和正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无处不在的下划线字符"><span class="toc-number">4.4.</span> <span class="toc-text">无处不在的下划线字符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#处理异常"><span class="toc-number">5.</span> <span class="toc-text">处理异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scala-中的异常"><span class="toc-number">5.1.</span> <span class="toc-text">Scala 中的异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意-catch-的顺序"><span class="toc-number">5.2.</span> <span class="toc-text">注意 catch 的顺序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#递归"><span class="toc-number">6.</span> <span class="toc-text">递归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用尾部调用优化回调"><span class="toc-number">6.1.</span> <span class="toc-text">使用尾部调用优化回调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scala确保尾调用优化"><span class="toc-number">6.2.</span> <span class="toc-text">scala确保尾调用优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#蹦床调用"><span class="toc-number">6.3.</span> <span class="toc-text">蹦床调用</span></a></li></ol></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>第二部分 深入 Scala</p>
 <p>是时候深入学习 Scala 了。读者将了解:</p>
 <ul>
 <li>如何创建和使用函数值</li>
@@ -289,11 +290,9 @@
 <p>修改后的 factorial()函数接收两个参数，其中第一个参数 fact 是已经计算出来的 部分结果。对 factorial()函数的递归调用发生在尾部，符合函数头部的注解。在做了这 样的更改之后，Scala 就不会报错，而会在调用中做优化。</p>
 <h2 id="蹦床调用"><a href="#蹦床调用" class="headerlink" title="蹦床调用"></a>蹦床调用</h2><p>尽管 Scala 中的尾调用优化非常强大，但也有诸多限制。编译器只能够检测到直接的递 归，也就是说函数调用自己。如果两个函数相互调用，也就是蹦床调用(trampoline call)， 那么 Scala 就无法检测到这种递归，也不会做优化。<br>用@scala.annotation.tailrec 去标记例子中的函数不会有效果— 你将会得到 错误提示，表明这些函数都不是递归的。Scala 编译器无法识别跨方法的递归。<br>像这种函数间相互调用产生的递归，我们可以用 TailRec 类和 scala.util.control. TailCalls 包中的可用函数解决。<br>TailRec 的实例将会保存函数值(参见第 6 章)。TailRec 中的 result()函数是一个 简单的迭代器或者说是循环。它会取出保存在 TailRec 中的内部函数，检查它是不是子类 Call 或者 Done 的实例。如果是 Call 的实例，那么它会发信号通知调用继续执行，迭代会 继续执行内部函数以便做进一步的处理。如果是 Done 的实例，那么它会发信号通知迭代终 止，并将内部函数中留存的结果返回。</p>
 
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/software-programming/">software programming</a>
       
@@ -301,114 +300,26 @@
       
 	  </div>
     
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/01/02/----81/">
-        Scala实用指南读书笔记（一）
-      </a>
-    </h2>
-    
-    <time>
-      1月 2, 2020
-    </time>
 		
-    
-    <div class='cats'>
-        <a href="/categories/professional-skill/">professional skill</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>第一部分 小试牛刀<br>Scala 是一门强大的编程语言:不需要牺牲强大的静态类型检查支持，就可以写出富有表 现力而又简洁的代码。</p>
-<h1 id="探索scala"><a href="#探索scala" class="headerlink" title="探索scala"></a>探索scala</h1><h2 id="scala的特殊性"><a href="#scala的特殊性" class="headerlink" title="scala的特殊性"></a>scala的特殊性</h2><p>scala的关键特性信息：</p>
-<ul>
-<li>同时支持命令式风格和函数式风格</li>
-<li>纯面向对象</li>
-<li>强制合理的静态类型和类型推断</li>
-<li>简洁而富有表现力</li>
-<li>能和 Java 无缝地互操作</li>
-<li>基于精小的内核构建</li>
-<li>高度的伸缩性，仅用少量代码就可以创建高性能的应用程序</li>
-<li>具有强大、易用的并发模型</li>
-</ul>
-<h2 id="以少胜多"><a href="#以少胜多" class="headerlink" title="以少胜多"></a>以少胜多</h2><p>用更少的代码解决更多的问题 — 简化日常编程<br>筛选出内部最高价格的股票</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Record</span>(<span class="params">year: <span class="type">Int</span>, month: <span class="type">Int</span>, date: <span class="type">Int</span>, closePrice: <span class="type">BigDecimal</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">PrintMax</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getYearEndClosingPrice</span></span>(symbol: <span class="type">String</span>, year: <span class="type">Int</span>): <span class="type">BigDecimal</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> url = <span class="string">s"https://raw.githubusercontent.com/ReactivePlatform/"</span> +</span><br><span class="line">      <span class="string">s"Pragmatic-Scala-StaticResources/master/src/main/resources/"</span> + <span class="string">s"stocks/daily/daily_<span class="subst">$symbol</span>.csv"</span></span><br><span class="line">    <span class="keyword">val</span> data = io.<span class="type">Source</span>.fromURL(url).mkString</span><br><span class="line">    <span class="keyword">val</span> maxClosePrize = data.split(<span class="string">"\n"</span>)</span><br><span class="line">      .filter(record =&gt; record.startsWith(<span class="string">s"<span class="subst">$year</span>-12"</span>)).map(record =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> <span class="type">Array</span>(timestamp, open, high, low, close, volume) = record.split(<span class="string">","</span>)</span><br><span class="line">      <span class="keyword">val</span> <span class="type">Array</span>(year, month, date) = timestamp.split(<span class="string">"-"</span>)</span><br><span class="line">      <span class="type">Record</span>(year.toInt, month.toInt, date.toInt, <span class="type">BigDecimal</span>(close.trim))</span><br><span class="line">    &#125;).sortBy(_.date)(<span class="type">Ordering</span>[<span class="type">Int</span>].reverse).take(<span class="number">1</span>)</span><br><span class="line">      .map(_.closePrice)</span><br><span class="line">      .head</span><br><span class="line">    maxClosePrize</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> symbols = <span class="type">List</span>(<span class="string">"AMD"</span>, <span class="string">"AAPL"</span>)</span><br><span class="line">    <span class="keyword">val</span> year = <span class="number">2017</span></span><br><span class="line">    <span class="keyword">val</span> (topStock, topPrice) = symbols.par.map &#123; ticker =&gt; (ticker, getYearEndClosingPrice(ticker, year)) &#125;</span><br><span class="line">      .maxBy &#123; stockPrice =&gt; stockPrice._2 &#125;</span><br><span class="line">    printf(<span class="string">s"Top stock of <span class="subst">$year</span> is <span class="subst">$topStock</span> closing at price $$<span class="subst">$topPrice</span>"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个功能强大的专用迭代器— map() 函数和 maxBy()函数。在 Java 中，我们习惯用“方法”这个术语来指代类的成员，而“函 数”这个术语通常用于指代不属于类的过程(procedure)。然而，在 Scala 中这两个术语可交 换使用。</p>
-<p>这两个迭代器分别行使了两种独立的职责。首先，我们使用 map()函数遍历股票代码， 以创建一个由股票代码及其 2017 年收盘价格组成的“对”或“元组”为元素的列表。最终结 果的元组列表形式为 List((股票代码 1，价格 1)，(股票代码 2，价格 2)，…)。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/01/02/----81/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/software-programming/">software programming</a>
-      
-        <a href="/tags/scala/">scala</a>
-      
-	  </div>
-    
-  </section>
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2020/01/02/----81/" rel="next"  title="Scala实用指南读书笔记（一）">
+						Scala实用指南读书笔记（一）
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
 </article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/01/01/----80/">
-        开局一只狗，装备全靠打
-      </a>
-    </h2>
-    
-    <time>
-      1月 1, 2020
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/blog/">blog</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>在开始这一篇的日记的时候，我居然因为今年一个倒霉催的开局，想到了这么二呼的一句话 ，其实吧，在这个时候，我也还在熬夜加班，等待着同事们在处理新疆网信办服务迁移的事情 。</p>
-<p>过去的每一年，我都特别期待每一年是一个全新的自己，而今年，就如我上一篇日记所说的我并没有特别的期待新年，因为很多事情已经在12月份做好了准备，而2020年我相信一定是我特别有收获的一年。</p>
-<p>其实细细回望过去，每一年我都很有收获。虽然我也怨恨过很多事情，但是发现自己被眷顾的事情也不少。有一个美好的妻子，可爱的女儿，以及不近不远的各种人际关系，使我的生活不会喧嚣，淡也不至于孤独和寂寞 。</p>
-<p>岳父和岳母的关系没有缓和的迹象，而生活需要给予他们的是一定的决断。男人这种东西，其实没有太多出息，岳母花费越多的心思去追寻男人，男人就是会嫌恶的更多。为什么这么清楚这个情况，也是我自己也是男人啊。</p>
-<p>最近又开始学习scala，针对上次的kotlin语言学习写了一个oss，golang写了一个proxy。scala也需要寻找一个全新的代码开始执行，要考虑使用vcc还是ass的权限组织架构生成来处理，实践才是学习的最快的方式。</p>
-<p>答应星爷这周去道馆报道的，衣服裤子也都洗了，好像也没有更多的理由去逃避了，这周六就开始恢复练习吧 ，也不枉费自己其实也练习了挺久的素振练习。再者，自己的这身肉，我也是扛不住了，在下真的是太肥了 。</p>
-<p>现在是2020年1月1日3:28分，一个并不完美的开局，却给我最好的感受，并没有过去的那种雄心壮志，也没有颓废的无法开始，学习，看书，记账，把自己整理的井井有条，在衣着和品味上也不断的提升。一个全方面提升的自己令自己感到安心，当然，我还是可以做的更好一点，但是如果陷入这种可以更好的思维，反而容易泥足不前。每一天1.01，要远比0.99好的多，要牢牢记住。</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/mood/">mood</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-</section>
-
-
+<script>
+	window.subData = {
+		title: 'Scala实用指南读书笔记（二）',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
