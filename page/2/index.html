@@ -111,6 +111,107 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2020/01/02/----81/">
+        Scala实用指南读书笔记（一）
+      </a>
+    </h2>
+    
+    <time>
+      1月 2, 2020
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/professional-skill/">professional skill</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>第一部分 小试牛刀<br>Scala 是一门强大的编程语言:不需要牺牲强大的静态类型检查支持，就可以写出富有表 现力而又简洁的代码。</p>
+<h1 id="探索scala"><a href="#探索scala" class="headerlink" title="探索scala"></a>探索scala</h1><h2 id="scala的特殊性"><a href="#scala的特殊性" class="headerlink" title="scala的特殊性"></a>scala的特殊性</h2><p>scala的关键特性信息：</p>
+<ul>
+<li>同时支持命令式风格和函数式风格</li>
+<li>纯面向对象</li>
+<li>强制合理的静态类型和类型推断</li>
+<li>简洁而富有表现力</li>
+<li>能和 Java 无缝地互操作</li>
+<li>基于精小的内核构建</li>
+<li>高度的伸缩性，仅用少量代码就可以创建高性能的应用程序</li>
+<li>具有强大、易用的并发模型</li>
+</ul>
+<h2 id="以少胜多"><a href="#以少胜多" class="headerlink" title="以少胜多"></a>以少胜多</h2><p>用更少的代码解决更多的问题 — 简化日常编程<br>筛选出内部最高价格的股票</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Record</span>(<span class="params">year: <span class="type">Int</span>, month: <span class="type">Int</span>, date: <span class="type">Int</span>, closePrice: <span class="type">BigDecimal</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">PrintMax</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getYearEndClosingPrice</span></span>(symbol: <span class="type">String</span>, year: <span class="type">Int</span>): <span class="type">BigDecimal</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> url = <span class="string">s"https://raw.githubusercontent.com/ReactivePlatform/"</span> +</span><br><span class="line">      <span class="string">s"Pragmatic-Scala-StaticResources/master/src/main/resources/"</span> + <span class="string">s"stocks/daily/daily_<span class="subst">$symbol</span>.csv"</span></span><br><span class="line">    <span class="keyword">val</span> data = io.<span class="type">Source</span>.fromURL(url).mkString</span><br><span class="line">    <span class="keyword">val</span> maxClosePrize = data.split(<span class="string">"\n"</span>)</span><br><span class="line">      .filter(record =&gt; record.startsWith(<span class="string">s"<span class="subst">$year</span>-12"</span>)).map(record =&gt; &#123;</span><br><span class="line">      <span class="keyword">val</span> <span class="type">Array</span>(timestamp, open, high, low, close, volume) = record.split(<span class="string">","</span>)</span><br><span class="line">      <span class="keyword">val</span> <span class="type">Array</span>(year, month, date) = timestamp.split(<span class="string">"-"</span>)</span><br><span class="line">      <span class="type">Record</span>(year.toInt, month.toInt, date.toInt, <span class="type">BigDecimal</span>(close.trim))</span><br><span class="line">    &#125;).sortBy(_.date)(<span class="type">Ordering</span>[<span class="type">Int</span>].reverse).take(<span class="number">1</span>)</span><br><span class="line">      .map(_.closePrice)</span><br><span class="line">      .head</span><br><span class="line">    maxClosePrize</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> symbols = <span class="type">List</span>(<span class="string">"AMD"</span>, <span class="string">"AAPL"</span>)</span><br><span class="line">    <span class="keyword">val</span> year = <span class="number">2017</span></span><br><span class="line">    <span class="keyword">val</span> (topStock, topPrice) = symbols.par.map &#123; ticker =&gt; (ticker, getYearEndClosingPrice(ticker, year)) &#125;</span><br><span class="line">      .maxBy &#123; stockPrice =&gt; stockPrice._2 &#125;</span><br><span class="line">    printf(<span class="string">s"Top stock of <span class="subst">$year</span> is <span class="subst">$topStock</span> closing at price $$<span class="subst">$topPrice</span>"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个功能强大的专用迭代器— map() 函数和 maxBy()函数。在 Java 中，我们习惯用“方法”这个术语来指代类的成员，而“函 数”这个术语通常用于指代不属于类的过程(procedure)。然而，在 Scala 中这两个术语可交 换使用。</p>
+<p>这两个迭代器分别行使了两种独立的职责。首先，我们使用 map()函数遍历股票代码， 以创建一个由股票代码及其 2017 年收盘价格组成的“对”或“元组”为元素的列表。最终结 果的元组列表形式为 List((股票代码 1，价格 1)，(股票代码 2，价格 2)，…)。</p>
+
+    
+	  <div class="readmore">
+      <a href="/2020/01/02/----81/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/software-programming/">software programming</a>
+      
+        <a href="/tags/scala/">scala</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
+      <a href="/2020/01/01/----80/">
+        开局一只狗，装备全靠打
+      </a>
+    </h2>
+    
+    <time>
+      1月 1, 2020
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/blog/">blog</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>在开始这一篇的日记的时候，我居然因为今年一个倒霉催的开局，想到了这么二呼的一句话 ，其实吧，在这个时候，我也还在熬夜加班，等待着同事们在处理新疆网信办服务迁移的事情 。</p>
+<p>过去的每一年，我都特别期待每一年是一个全新的自己，而今年，就如我上一篇日记所说的我并没有特别的期待新年，因为很多事情已经在12月份做好了准备，而2020年我相信一定是我特别有收获的一年。</p>
+<p>其实细细回望过去，每一年我都很有收获。虽然我也怨恨过很多事情，但是发现自己被眷顾的事情也不少。有一个美好的妻子，可爱的女儿，以及不近不远的各种人际关系，使我的生活不会喧嚣，淡也不至于孤独和寂寞 。</p>
+<p>岳父和岳母的关系没有缓和的迹象，而生活需要给予他们的是一定的决断。男人这种东西，其实没有太多出息，岳母花费越多的心思去追寻男人，男人就是会嫌恶的更多。为什么这么清楚这个情况，也是我自己也是男人啊。</p>
+<p>最近又开始学习scala，针对上次的kotlin语言学习写了一个oss，golang写了一个proxy。scala也需要寻找一个全新的代码开始执行，要考虑使用vcc还是ass的权限组织架构生成来处理，实践才是学习的最快的方式。</p>
+<p>答应星爷这周去道馆报道的，衣服裤子也都洗了，好像也没有更多的理由去逃避了，这周六就开始恢复练习吧 ，也不枉费自己其实也练习了挺久的素振练习。再者，自己的这身肉，我也是扛不住了，在下真的是太肥了 。</p>
+<p>现在是2020年1月1日3:28分，一个并不完美的开局，却给我最好的感受，并没有过去的那种雄心壮志，也没有颓废的无法开始，学习，看书，记账，把自己整理的井井有条，在衣着和品味上也不断的提升。一个全方面提升的自己令自己感到安心，当然，我还是可以做的更好一点，但是如果陷入这种可以更好的思维，反而容易泥足不前。每一天1.01，要远比0.99好的多，要牢牢记住。</p>
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/mood/">mood</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2019/12/18/----79/">
         年底的颓废状态
       </a>
@@ -241,96 +342,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2010/10/06/----76/">
-        百花缭乱
-      </a>
-    </h2>
-    
-    <time>
-      10月 6, 2010
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/qzone/">qzone</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <blockquote>
-<p>写于  2010-10-6 14:14</p>
-</blockquote>
-<p>从现在这一分钟起,可以学习如何耐的住寂寞.</p>
-<p>记仇什么的最没意思了,我才不记仇.我只是会忘记对你的好,忘掉就好了,记仇是很难的,但仇恨的那一刻对自己植入一个想法就可以忘掉如何对你好,这样看来是不是很方便的方式.我看起来不错嘛~~那就这么做,从这一刻忘掉如何对你好.开始记起如何对自己好.</p>
-<p>昨天才觉得生活好的连多愁善感的时间都没有,今天却有大把时间可以用来多愁善感.以此看来是否多愁善感不过是牵动的那一丝联系上.联系着你我的生活让我没有感觉到飘浮不定的情绪.而今天却全部回溯到身体的每一个细胞.这种飘忽啊飘忽的情绪.靠别人来怜悯是没有作用的.在每个街头的争执也不会换来下一次面对生活更加优越的快感.不如节省点这点情绪.</p>
-<p>要读的书堆积如山.要做的事也一样.但想做的事情却只有一样,就是现在没有办法做的事情.这种矛盾只能跟随着耳机的嘶吼来缓解.或者在这里胡言乱语来抒发情绪.下一刻我一定会把这满纸荒唐给忘的干干净净.明显,我的记忆力不好.如果记忆力太好,就会自己绕不过自己.但是记忆力太不好.再想起来就无法原谅自己的愚蠢.这点,真矛盾啊.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2010/10/06/----76/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/qzone/">qzone</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2010/10/02/----75/">
-        三坊七巷是什么？
-      </a>
-    </h2>
-    
-    <time>
-      10月 2, 2010
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/qzone/">qzone</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <blockquote>
-<p>写于  2010-10-2 01:14</p>
-</blockquote>
-<p>星巴克入驻从很久以前就开始炒作，直到几天前正式营业。各种各样的粉丝和猎奇者在其门口排起了长龙，据传闻还有星巴克的铁杆粉丝穿梭于各地的新开张的星巴克秒杀各种城市杯的传闻，对此唏嘘不已。</p>
-<p>我必须承认的一个事实就是，我一点都不懂咖啡，不懂的程度到，只要你给我加足奶和糖，不让我忍受过多的酸苦，我就已经很满意。但是对于星巴克这样名目的进入我们所谓的文化古街，不得不有微词。三坊七巷的仿古建筑本身透露的就是一股子低俗的品位，执政者似乎完全没有艺术品位和文化涵养。一味的追求于看起来像是古代建筑这种风格在走形式。而其中不得不悲哀的就是这种造假造谣的建筑立面还充斥着各式各样令人恶心的内在。从地方特产到酒吧咖啡屋，好似全无主张和规划。有人说我们现在已经面临了一个新的破坏古迹高峰的时代。犹如第二次文化大革命，其区别只在于当时的人们破坏古迹还是为了理想，而现在的人们为的只是利益。而面对这样的行为无能为力的我，只能每每走过都找不到自己小时候住家的悲凉。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2010/10/02/----75/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/qzone/">qzone</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -383,11 +394,13 @@
     
     <ul class="entry">
     
-        <li><a class="flat-box" href="/categories/blog/"><div class='name'>blog</div><div class='badget'>3</div></a></li>
+        <li><a class="flat-box" href="/categories/blog/"><div class='name'>blog</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/books/"><div class='name'>books</div><div class='badget'>1</div></a></li>
     
         <li><a class="flat-box" href="/categories/professional-skill/"><div class='name'>professional skill</div><div class='badget'>3</div></a></li>
     
-        <li><a class="flat-box" href="/categories/qzone/"><div class='name'>qzone</div><div class='badget'>79</div></a></li>
+        <li><a class="flat-box" href="/categories/qzone/"><div class='name'>qzone</div><div class='badget'>78</div></a></li>
     
     </ul>
     
@@ -398,7 +411,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/mood/" style="font-size: 14px; color: #808080">mood</a> <a href="/tags/qzone/" style="font-size: 20px; color: #000">qzone</a> <a href="/tags/scala/" style="font-size: 14px; color: #808080">scala</a> <a href="/tags/software-programming/" style="font-size: 14px; color: #808080">software programming</a>
+        <a href="/tags/mood/" style="font-size: 17px; color: #404040">mood</a> <a href="/tags/psychics/" style="font-size: 14px; color: #808080">psychics</a> <a href="/tags/qzone/" style="font-size: 20px; color: #000">qzone</a> <a href="/tags/reading/" style="font-size: 14px; color: #808080">reading</a> <a href="/tags/reading-notes/" style="font-size: 14px; color: #808080">reading notes</a> <a href="/tags/scala/" style="font-size: 17px; color: #404040">scala</a> <a href="/tags/software-programming/" style="font-size: 17px; color: #404040">software programming</a>
     </div>
 </div>
 
